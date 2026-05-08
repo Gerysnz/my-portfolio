@@ -1,122 +1,106 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import ProjectCard from './components/ProjectCard';
+import './App.scss';
+import { projects } from './data/projects';
+import profilePic from './images/me.jpeg';
+
+const skills = [
+  { cat: 'Lenguajes', items: [['JavaScript', true], ['Python', true], ['SQL', false], ['PHP', false], ['Java', false]] },
+  { cat: 'Frontend',  items: [['React.js', true], ['Vue.js', true], ['Tailwind', false], ['HTML5/CSS3', false], ['Bootstrap', false]] },
+  { cat: 'Backend',   items: [['Django / DRF', true], ['Node.js', false], ['PHP nativo', false], ['PostgreSQL', false]] },
+  { cat: 'Tools',     items: [['Git / GitHub', false], ['SCRUM', false], ['Postman', false], ['PowerShell', false], ['WordPress', false]] },
+];
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
+    <div className="port">
+
+      <header className="hdr">
+        <div className="hdr-top">
+          <span className="tag">Portfolio — 2026</span>
+          <span className="status"><span className="dot" />disponible</span>
         </div>
+        <h1>Gerard<br /><em>Sánchez</em></h1>
+        <p className="subtitle">FULLSTACK DEVELOPER &nbsp;/&nbsp; REACT + DJANGO &nbsp;/&nbsp; IA INTEGRATION</p>
+        <div className="hdr-meta">
+          
+          <div className="meta-item">ubicación <span>Sant Joan Despí, BCN</span></div>
+          <div className="meta-item">contacto <span>gerysnz@gmail.com</span></div>
+          <div className="meta-item">idiomas <span>CA / ES / EN B2</span></div>
+        </div>
+        <div className="hero-photo-wrap">
+          <img src={profilePic} alt="Gerard Sánchez" className="hero-photo" />
+        </div>
+        <div className="nav-links">
+          <a href="https://www.linkedin.com/in/gerard-sanchez-618aa0377/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
+          <a href="https://github.com/Gerysnz" target="_blank" rel="noreferrer">GitHub ↗</a>
+        </div>
+      </header>
+
+      <section className="about">
+        <span className="section-label">Perfil</span>
+        <p className="about-text">
+          Desarrollador recién graduado con mentalidad de <strong>"problem solver"</strong>.
+          Me especializo en construir SPAs con React y Django, integrar modelos de IA
+          y orquestar APIs complejas. Acostumbrado a entornos SCRUM y
+          a aprender rápido lo que haga falta.
+        </p>
+      </section>
+
+      <section className="skills">
+        <span className="section-label">Stack</span>
+        <div className="skills-grid">
+          {skills.map(({ cat, items }) => (
+            <div className="skill-row" key={cat}>
+              <span className="skill-cat">{cat}</span>
+              <div className="skill-tags">
+                {items.map(([name, hot]) => (
+                  <span className={`stag${hot ? ' hot' : ''}`} key={name}>{name}</span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="projects">
+        <div className="proj-header">
+          <span className="section-label">Proyectos</span>
+        </div>
+        <div className="proj-list">
+          {projects.map((p) => (
+            <ProjectCard key={p.num} {...p} />
+          ))}
+        </div>
+      </section>
+
+      <section className="exp">
+        <span className="section-label">Experiencia</span>
+        <div className="exp-list">
+          <div className="exp-item">
+            <div className="exp-meta">OCT 2025 — ABR 2026 · 515h FCT</div>
+            <div className="exp-title">Desarrollador Web & Sistemas</div>
+            <div className="exp-company">Plural Informática</div>
+            <p className="exp-desc">Desarrollo de herramientas ERP internas, apps a medida, gestión de servidores y Google Workspace. Despliegue de sitios corporativos con WordPress/Elementor.</p>
+          </div>
+          
+        </div>
+      </section>
+
+      <footer className="main-footer">
+        <span className="section-label">Contacto</span>
         <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
+          <p className="footer-cta">¿Tienes un proyecto? Hablamos.</p>
+          <div className="footer-links">
+            <a href="mailto:gerysnz@gmail.com">gerysnz@gmail.com</a>
+            <a href="https://linkedin.com/in/tu-perfil" target="_blank" rel="noreferrer">LinkedIn</a>
+            <a href="https://github.com/Gerysnz" target="_blank" rel="noreferrer">GitHub</a>
+          </div>
+          <p className="footer-note">Sant Joan Despí · Barcelona · 2026</p>
         </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+      </footer>
 
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;
